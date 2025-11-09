@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>أذكار - تركي</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Cairo", sans-serif;
+    }
+
+    /* شاشة التحميل */
+    #loading-screen {
+      background: linear-gradient(135deg, #003b66, #0077aa);
+      color: white;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      transition: opacity 0.8s ease;
+    }
+
+    #loading-screen h1 {
+      font-size: 4em;
+      font-weight: bold;
+      margin-top: 150px;
+      text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.5);
+      font-family: "Amiri", serif;
+      letter-spacing: 3px;
+    }
+
+    #loading-screen .bottom {
+      margin-bottom: 60px;
+    }
+
+    #loading-screen .bottom h2 {
+      font-size: 2em;
+      font-weight: bold;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+      margin-bottom: 10px;
+      font-family: "Amiri", serif;
+    }
+
+    #loading-screen .bottom p {
+      font-size: 0.9em;
+      color: #e0e0e0;
+    }
+
+    /* الصفحة الثانية */
+    #main-page {
+      display: none;
+      background-color: #000;
+      color: white;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px 30px;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    button {
+      background: #111;
+      border: 1px solid #444;
+      color: white;
+      font-size: 1.2em;
+      padding: 10px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #333;
+      transform: scale(1.05);
+    }
+
+    /* النافذة المنبثقة */
+    #popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 2em;
+      text-align: center;
+      z-index: 100;
+    }
+
+    #popup div {
+      background: #111;
+      padding: 40px;
+      border-radius: 12px;
+      border: 1px solid #555;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- شاشة التحميل -->
+  <div id="loading-screen">
+    <h1>أذكار</h1>
+    <div class="bottom">
+      <h2>تركي</h2>
+      <p>صدقة جارية عن سعد ساعد المالكي</p>
+    </div>
+  </div>
+
+  <!-- الصفحة الثانية -->
+  <div id="main-page">
+    <div class="button-grid">
+      <button>القرآن</button>
+      <button>أذكار الصباح</button>
+      <button>أذكار المساء</button>
+      <button>الاستغفار</button>
+      <button>الدعاء</button>
+      <button>الصلاة على النبي</button>
+      <button>تسبيح</button>
+      <button>أدعية النوم</button>
+      <button>آية الكرسي</button>
+      <button>سورة الإخلاص</button>
+    </div>
+  </div>
+
+  <!-- النافذة المنبثقة -->
+  <div id="popup"><div id="popup-content"></div></div>
+
+  <script>
+    // بعد 3 ثواني ننتقل للصفحة السوداء
+    setTimeout(() => {
+      document.getElementById("loading-screen").style.opacity = "0";
+      setTimeout(() => {
+        document.getElementById("loading-screen").style.display = "none";
+        document.getElementById("main-page").style.display = "flex";
+      }, 800);
+    }, 3000);
+
+    // لما يضغط الزر يظهر نصه في نافذة
+    const buttons = document.querySelectorAll("button");
+    const popup = document.getElementById("popup");
+    const popupContent = document.getElementById("popup-content");
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        popupContent.textContent = btn.textContent;
+        popup.style.display = "flex";
+      });
+    });
+
+    popup.addEventListener("click", () => {
+      popup.style.display = "none";
+    });
+  </script>
+
+</body>
+</html>
